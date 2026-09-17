@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHC IT Support Helpdesk</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f8f5f7;
+        }
+
+        /* Main 3-Column Grid Layout */
+        .helpdesk-wrapper {
+            display: grid;
+            grid-template-columns: 320px minmax(450px, 650px) 320px;
+            gap: 24px;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Milestone Side Panels */
+        .milestone-panel {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-height: 85vh;
+            justify-content: center;
+        }
+
+        .milestone-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(74, 21, 37, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease;
+        }
+
+        .milestone-card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Image Styling with Vintage Ambiance */
+        .image-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            background: #eae2e6;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(20%) contrast(105%);
+        }
+
+        /* Caption Text Styling */
+        .milestone-caption {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #33292d;
+            text-align: left;
+            margin: 0;
+        }
+
+        /* Central Form Container Styling */
+        .helpdesk-main-form {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(74, 21, 37, 0.08);
+            padding: 30px;
+            z-index: 2;
+        }
+
+        /* Responsive Design for smaller screens */
+        @media (max-width: 1200px) {
+            .helpdesk-wrapper {
+                grid-template-columns: 1fr;
+                max-width: 650px;
+                margin: 0 auto;
+            }
+            .milestone-panel {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="helpdesk-wrapper">
+  <!-- Left Milestone Panel -->
+  <aside class="milestone-panel left-panel">
+    <div class="milestone-card">
+      <div class="image-wrapper">
+        <img id="daily-img-1" src="" alt="IT Milestone Left">
+      </div>
+      <p id="daily-text-1" class="milestone-caption"></p>
+    </div>
+  </aside>
+
+  <!-- Central Form Area -->
+  <main class="helpdesk-main-form">
+    <div id="special-event-banner"></div>
+    
+    <!-- EMBED YOUR FORM CONTENT HERE -->
+    <h2 style="color: #4a1525; margin-top: 0;">DHC Outpatients Helpdesk</h2>
+    <p style="color: #666; font-size: 0.9rem;">Submit your support request below.</p>
+    
+    <form>
+      <div style="margin-bottom: 15px;">
+        <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:5px;">Your Name</label>
+        <input type="text" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:6px;" placeholder="Enter your name">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:5px;">Email Address</label>
+        <input type="email" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:6px;" placeholder="name@dhc.nhs.uk">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:5px;">Message</label>
+        <textarea rows="4" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:6px;" placeholder="Describe your IT issue..."></textarea>
+      </div>
+      <button type="submit" style="background: #4a1525; color: white; border: none; padding: 12px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%;">Submit Request</button>
+    </form>
+  </main>
+
+  <!-- Right Milestone Panel -->
+  <aside class="milestone-panel right-panel">
+    <div class="milestone-card">
+      <div class="image-wrapper">
+        <img id="daily-img-2" src="" alt="IT Milestone Right">
+      </div>
+      <p id="daily-text-2" class="milestone-caption"></p>
+    </div>
+  </aside>
+</div>
+
+<script>
+  // 14-Day Cycle Rotation Array (28 unique images total)
+  const milestoneCycle = [
+    {
+      left: { img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5", text: "In 1843, Ada Lovelace published the first algorithm intended for a machine, earning her recognition as the world's first programmer." },
+      right: { img: "https://images.unsplash.com/photo-1518770660439-4636190af475", text: "The Transistor was invented at Bell Labs in 1947 by Bardeen, Brattain, and Shockley, completely revolutionizing modern electronics." }
+    },
+    {
+      left: { img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b", text: "In 1945, ENIAC became one of the earliest general-purpose electronic computers, weighing over 27 tons and filling an entire room." },
+      right: { img: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2", text: "Grace Hopper popularized machine-independent programming languages, paving the way for COBOL in the late 1950s." }
+    }
+    // You can easily append up to 14 pairs here to fill your 2-week cycle!
+  ];
+
+  function loadHelpdeskTheme() {
+    const now = new Date();
+    const month = now.getMonth(); // 4 = May
+    const date = now.getDate();   // 17
+
+    const leftImg = document.getElementById('daily-img-1');
+    const leftText = document.getElementById('daily-text-1');
+    const rightImg = document.getElementById('daily-img-2');
+    const rightText = document.getElementById('daily-text-2');
+    const bannerContainer = document.getElementById('special-event-banner');
+
+    // Special May 17th Automation (World Telecommunication Day)
+    if (month === 4 && date === 17) {
+      leftImg.src = "https://images.unsplash.com/photo-1544197150-b99a580bb7a8";
+      leftText.textContent = "May 17 marks World Telecommunication and Information Society Day, commemorating the founding of the ITU in 1865.";
+      
+      rightImg.src = "https://images.unsplash.com/photo-1521791136064-7986c2920216";
+      rightText.textContent = "From early telegraph cables to modern global fiber networks, telecommunications bridge human connection across the globe.";
+
+      if (bannerContainer) {
+        bannerContainer.innerHTML = `
+          <div style="background: linear-gradient(135deg, #4a1525, #7a223e); color: #fff; padding: 10px 16px; border-radius: 8px; font-size: 0.85rem; text-align: center; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(74,21,37,0.15);">
+            🌐 <strong>World Telecommunication & Information Society Day</strong> — Connecting the World Since 1865
+          </div>`;
+      }
+    } else {
+      // Standard 14-Day Cycle Rotation based on epoch days
+      const oneDayMS = 24 * 60 * 60 * 1000;
+      const dayEpoch = Math.floor(Date.now() / oneDayMS);
+      const cycleIndex = dayEpoch % milestoneCycle.length;
+      const todayPair = milestoneCycle[cycleIndex];
+
+      leftImg.src = todayPair.left.img;
+      leftText.textContent = todayPair.left.text;
+      rightImg.src = todayPair.right.img;
+      rightText.textContent = todayPair.right.text;
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', loadHelpdeskTheme);
+</script>
+
+</body>
+</html>

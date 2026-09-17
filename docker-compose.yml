@@ -161,6 +161,8 @@ services:
     depends_on:
       zammad-railsserver:
         condition: service_healthy
+    volumes:
+      - ./public/favicon.ico:/opt/zammad/public/favicon.ico
 
   zammad-postgresql:
     environment:
