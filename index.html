@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHC IT Support Helpdesk</title>
+    <!-- Import Modern Clean Font (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5eef4 0%, #e6d5e3 100%);
+            color: #33292d;
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .portal-wrapper {
+            background: #ffffff;
+            max-width: 720px;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(91, 30, 99, 0.15);
+            overflow: hidden;
+            border-top: 6px solid #5B1E63;
+            border: 1px solid rgba(91, 30, 99, 0.12);
+        }
+        .portal-header {
+            text-align: center;
+            padding: 40px 30px 22px 30px;
+            background: #ffffff;
+            border-bottom: 1px solid #f0e6ee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .portal-header img {
+            width: 145px;
+            height: 145px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border-radius: 14px;
+            background: #ffffff;
+            padding: 4px;
+            box-shadow: 0 6px 18px rgba(91, 30, 99, 0.1);
+        }
+        .portal-header h2 {
+            color: #4A4D52;
+            font-size: 1.2rem;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .form-content {
+            padding: 35px 45px 15px 45px;
+        }
+
+        /* Custom DHC Service Area Section */
+        .custom-dhc-section {
+            margin-bottom: 25px;
+            background: #fcf8fa;
+            border: 1px solid rgba(168, 5, 107, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .custom-dhc-section label.main-label {
+            display: block;
+            font-weight: 700;
+            color: #5B1E63;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+        .radio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .radio-grid label {
+            font-weight: 500;
+            color: #444;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        .radio-grid input[type="radio"] {
+            accent-color: #A8056B;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        #zammad-form-container {
+            width: 100%;
+        }
+
+        /* Zammad Form Field Overrides */
+        #zammad-form-container .form-group {
+            margin-bottom: 22px;
+        }
+        #zammad-form-container label {
+            display: block;
+            font-weight: 700 !important;
+            color: #5B1E63 !important;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        #zammad-form-container input[type="text"],
+        #zammad-form-container input[type="email"],
+        #zammad-form-container textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #dcdfe6;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            background-color: #fcfcfc;
+            color: #333;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+        #zammad-form-container input:focus,
+        #zammad-form-container textarea:focus {
+            border-color: #A8056B;
+            outline: none;
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(168, 5, 107, 0.15);
+        }
+
+        /* Submit Button Styling */
+        #zammad-form-container button, 
+        #zammad-form-container input[type="submit"] {
+            background: linear-gradient(135deg, #A8056B 0%, #5B1E63 100%) !important;
+            border: none !important;
+            color: white !important;
+            padding: 14px 28px !important;
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 1.05rem !important;
+            border-radius: 8px !important;
+            box-shadow: 0 6px 20px rgba(168, 5, 107, 0.3) !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            margin-top: 10px;
+            width: 100%;
+        }
+        #zammad-form-container button:hover, 
+        #zammad-form-container input[type="submit"]:hover {
+            background: linear-gradient(135deg, #b80d75 0%, #6d2477 100%) !important;
+            box-shadow: 0 8px 25px rgba(168, 5, 107, 0.45) !important;
+            transform: translateY(-2px);
+        }
+
+        /* Daily IT Fact Box Styling */
+        .daily-fact-card {
+            background-color: #fcf8fa;
+            border-left: 4px solid #A8056B;
+            padding: 16px 20px;
+            margin: 0 45px 35px 45px;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.9rem;
+            color: #444;
+            box-shadow: 0 4px 15px rgba(91, 30, 99, 0.04);
+        }
+        .daily-fact-card strong {
+            color: #5B1E63;
+            display: block;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 650px) {
+            .form-content { padding: 25px 20px; }
+            .daily-fact-card { margin: 0 20px 25px 20px; }
+            .radio-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portal-wrapper">
+        <div class="portal-header">
+            <img src="DHC-logo-square.jpg" alt="DHC Logo">
+            <h2>IT Support Helpdesk</h2>
+        </div>
+        
+        <div class="form-content">
+            <!-- Custom DHC Service Area Selector -->
+            <div class="custom-dhc-section">
+                <label class="main-label">Select DHC Service Area *</label>
+                <div class="radio-grid">
+                    <label><input type="radio" name="dhc_service_area" value="GP Federation"> GP Federation</label>
+                    <label><input type="radio" name="dhc_service_area" value="Outpatients"> Outpatients</label>
+                    <label><input type="radio" name="dhc_service_area" value="Talking Therapies"> Talking Therapies</label>
+                    <label><input type="radio" name="dhc_service_area" value="PCN"> PCN</label>
+                </div>
+            </div>
+
+            <!-- Zammad Form Container -->
+            <div id="zammad-form-container"></div>
+        </div>
+
+        <!-- Daily Rotating IT Fact Box -->
+        <div class="daily-fact-card">
+            <strong id="daily-fact-title">💡 IT Fact & Tip of the Day</strong>
+            <span id="daily-fact-text">Loading daily IT knowledge...</span>
+        </div>
+    </div>
+
+    <!-- Zammad Form Plugin Script -->
+    <script id="zammad_form_script" src="http://10.203.182.72:8080/assets/form/form.js"></script>
+
+    <script>
+    $(function() {
+        var submittedCustomerName = '';
+
+        // Initialize Zammad Form Widget
+        $('#zammad-form-container').ZammadForm({
+            messageTitle: 'DHC IT Support Request',
+            messageSubmit: 'Submit Request',
+            messageThankYou: 'Thank you for your inquiry (#%s)! We\'ll contact you as soon as possible.',
+            showTitle: false,
+            modal: false,
+            attachmentSupport: true
+        });
+
+        // Validate service area, capture name, and inject payload into message body on submit
+        $(document).on('submit', '#zammad-form-container form', function(e) {
+            var selectedArea = $('input[name="dhc_service_area"]:checked').val();
+            
+            if (!selectedArea) {
+                alert('Please select a DHC Service Area before submitting.');
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+
+            // Capture the customer's name BEFORE Zammad clears form inputs
+            submittedCustomerName = '';
+            $('#zammad-form-container input[type="text"]').each(function() {
+                var val = $(this).val().trim();
+                var fieldName = ($(this).attr('name') || '').toLowerCase();
+                if (fieldName.indexOf('name') !== -1 && val) {
+                    submittedCustomerName = val;
+                }
+            });
+            if (!submittedCustomerName) {
+                var firstInputVal = $('#zammad-form-container input[type="text"]').first().val();
+                if (firstInputVal) submittedCustomerName = firstInputVal.trim();
+            }
+
+            var $textarea = $('#zammad-form-container textarea');
+            if ($textarea.length) {
+                var currentMsg = $textarea.val();
+                currentMsg = currentMsg.replace(/^\[DHC Service Area:.*?\]\n\n?/, '');
+                $textarea.val('[DHC Service Area: ' + selectedArea + ']\n\n' + currentMsg).trigger('input');
+            }
+        });
+
+        // MutationObserver to safely extract ticket ID and inject personalized success card
+        var observer = new MutationObserver(function(mutations, obs) {
+            var container = document.getElementById('zammad-form-container');
+            if (!container) return;
+
+            var $successMsg = $(container).find('*').filter(function() {
+                return $(this).text().indexOf('Thank you for your inquiry') !== -1 && $(this).children().length === 0;
+            });
+
+            if ($successMsg.length > 0) {
+                var fullText = $successMsg.text();
+                var ticketMatch = fullText.match(/\((#[0-9]+)\);/);
+                if (!ticketMatch) ticketMatch = fullText.match(/\((#[0-9]+)\)/);
+                var ticketStr = ticketMatch ? ticketMatch[1] : '';
+                var displayName = submittedCustomerName ? submittedCustomerName : 'there';
+
+                obs.disconnect();
+                
+                $successMsg.parent().html(
+                    '<div style="background: linear-gradient(135deg, #fcf8fa 0%, #f4e8f1 100%); ' +
+                    'border: 2px dashed #A8056B; padding: 25px; border-radius: 12px; text-align: center; color: #5B1E63; margin-bottom: 10px;">' +
+                    '<h3 style="margin: 0 0 10px 0; color: #A8056B; font-size: 1.3rem;">Thank you <strong>' + displayName + '</strong>! 🎉</h3>' +
+                    '<p style="margin: 0; font-size: 0.98rem; color: #444; line-height: 1.6;">' +
+                    'Your ticket <strong>' + ticketStr + '</strong> has successfully landed on our desk. ' +
+                    '<strong>Our IT superheroes are already reviewing it and will catch up with you soon! 🚀</strong>' +
+                    '</p>' +
+                    '</div>'
+                );
+                
+                obs.observe(container, { childList: true, subtree: true, characterData: true });
+            }
+        });
+
+        var container = document.getElementById('zammad-form-container');
+        if (container) {
+            observer.observe(container, { childList: true, subtree: true, characterData: true });
+        }
+
+        // Daily IT Facts Rotator & World ICT Day Special Handler
+        var combinedItFacts = [
+            "Locking your screen with Windows Key + L whenever you step away keeps patient data secure and confidential.",
+            "Phishing emails often create a false sense of urgency. Always take a moment to pause and verify unusual requests.",
+            "Restarting your computer once a week clears out background cache leaks and keeps system performance snappy.",
+            "Strong passwords use a mix of uppercase letters, numbers, and symbols—or three easy random words combined together!",
+            "NHS.net multi-factor authentication (MFA) is your frontline defense against unauthorized access and credential theft.",
+            "Regular system updates apply critical security patches before emerging digital threats can exploit them.",
+            "Backing up important workflow documents ensures business continuity even if hardware fails unexpectedly.",
+            "The first computer 'bug' was literally a real live moth trapped inside Relay #75 of the Harvard Mark II computer in 1947.",
+            "The total weight of all electrons moving through the entire internet at any given microsecond is roughly the weight of a single strawberry.",
+            "The Apollo 11 moon-landing computer in 1969 had only 73 KB of memory—millions of times less powerful than a modern digital car key.",
+            "QWERTY keyboards were deliberately arranged to slow typists down so mechanical typewriter arms wouldn't jam together.",
+            "The iconic Apple command (⌘) key symbol is actually an old 14th-century Swedish road sign indicating a cultural landmark or campground.",
+            "More than 90% of the entire world's currency exists purely as digital data entries in databases; physical cash makes up less than 10%.",
+            "The domain name 'symbolics.com' was registered on March 15, 1985, making it the very first dot-com domain on the internet, and it is still active today!",
+            "CAPTCHA stands for 'Completely Automated Public Turing test to tell Computers and Humans Apart'.",
+            "The Bluetooth technology name comes from Harald Bluetooth, a 10th-century Scandinavian king who united tribes just like Bluetooth unites devices.",
+            "Wi-Fi doesn't actually stand for an acronym; it was created purely as a catchy marketing placeholder by a branding firm."
+        ];
+
+        var now = new Date();
+        var month = now.getMonth() + 1; // 1-12
+        var day = now.getDate(); // 1-31
+
+        if (month === 5 && day === 17) {
+            // World ICT Day Special Greeting
+            $('#daily-fact-title').text('🌍 Happy World ICT Day! (17th May)');
+            $('#daily-fact-text').html('Celebrating the remarkable power of Information and Communication Technology in transforming healthcare delivery, bridging communities, and empowering IT innovators worldwide! 🎉');
+            $('.daily-fact-card').css({
+                'background-color': '#f3e6f0',
+                'border-left-color': '#5B1E63'
+            });
+        } else {
+            var start = new Date(now.getFullYear(), 0, 0);
+            var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+            var dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
+            var factIndex = dayOfYear % combinedItFacts.length;
+
+            $('#daily-fact-text').text(combinedItFacts[factIndex]);
+        }
+    });
+    </script>
+
+</body>
+</html>
