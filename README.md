@@ -1,42 +1,37 @@
-# Welcome to Zammad
+Enterprise Helpdesk Deployment, Custom Portal Development & Automated Reporting Pipeline
+This comprehensive document serves as a complete technical portfolio piece for your GitHub repository and LinkedIn profile. It chronicles the end-to-end architecture, deployment, custom front-end development, and automated reporting pipeline for your enterprise IT support helpdesk system.
 
-Are you juggling countless customer inquiries across multiple channels?
-Struggling to keep your support team on the same page?
-Or spending more time managing your helpdesk than delivering exceptional support to your customers?
+📋 Executive Summary
+This project delivers a robust, containerised internal IT helpdesk solution built from bare-metal hardware up to a polished, branded user portal and automated reporting pipeline. Designed to streamline service requests across healthcare service areas (GP Federation, Outpatients, Talking Therapies, and PCN), the solution combines Ubuntu Server, Docker, Zammad, PostgreSQL, custom HTML5/JavaScript front-end engineering, and an automated Python/OpenPyXL export engine.
 
-Zammad is your Swiss Army knife - a web-based, open-source helpdesk and customer support platform
-packed with features to streamline customer communication across channels like email, chat, telephone and social media.
+🛠️ Major Project Milestones
+Milestone 1: Bare-Metal Infrastructure & Remote Administration
+Hardware & OS Deployment: Provisioned a dedicated host machine, installed a fresh distribution of Ubuntu Server LTS on an SSD, configured static local networking, and established robust SSH access for headless remote management from a secondary workstation.
 
-## The Software
+Security & Environment Preparation: Configured firewall rules, system user permissions, and directory structures to support containerised workloads.
 
-The Zammad software is and will stay open source. It is licensed under the GNU AGPLv3.
-The source code is [available on GitHub](https://github.com/zammad/zammad) and owned by
-the [Zammad Foundation](https://zammad-foundation.org/), which is independent of commercial
-providers such as Zammad GmbH.
+Milestone 2: Containerised Helpdesk Architecture (Zammad & PostgreSQL)
+Docker & Docker Compose: Deployed Zammad—an open-source, feature-rich ticketing system—alongside a PostgreSQL database backend inside isolated Docker containers.
 
-## The Company - Zammad GmbH
+Persistence & Network Bridges: Configured Docker volumes to ensure database persistence across container lifecycle events and mapped internal ports for local intranet accessibility ([http://10.203.182.72:8080](http://10.203.182.72:8080)).
 
-The development of Zammad is carried out by the [amazing team of people](https://zammad.com/en/company)
-at [Zammad GmbH](https://zammad.com/) in collaboration with the community.
-We love to create open source software for you. If you want to ensure the Zammad software
-has a bright and sustainable future, consider becoming a Zammad customer!
+Milestone 3: Custom Front-End Portal & Dynamic Enhancements
+Branded Interface: Designed a clean, accessible, modern UI featuring corporate colour gradients (#5B1E63 and #A8056B), Inter typography, and responsive layout grids.
 
-> Are you tired of complex setup, configuration, backup and update tasks? Let us handle this stuff for you! 🚀
->
-> The easiest and often most cost-effective way to operate Zammad is [our cloud service](https://zammad.com/en/pricing).
-> Give it a try with a [free trial instance](https://zammad.com/en/getting-started)!
+Service Area Routing: Integrated a custom radio-button selection grid forcing users to specify their DHC Service Area (GP Federation, Outpatients, Talking Therapies, PCN), automatically injecting this metadata into the ticket payload.
 
-## Getting Started - Documentation
+Asynchronous Success Handling: Implemented a MutationObserver script to intercept Zammad's asynchronous success callbacks, extract the generated ticket number (e.g., #10042), and render a bespoke, celebratory success card personalised with the user's name.
 
-[Learn more on Zammad’s documentation](https://docs.zammad.org/en/latest/install/docker-compose.html)
+Daily IT Fact & Tip Rotator: Engineered a dynamic script that calculates the day of the year (dayOfYear % totalFacts) to rotate through a curated repository of cybersecurity, hardware, and IT history facts daily.
 
-## Upgrading
+World ICT Day Special Feature: Added precise date-checking logic to automatically override standard tips on 17th May to display celebratory greetings and special information for World ICT Day.
 
-For upgrading instructions, see our [Releases](https://github.com/zammad/zammad-docker-compose/releases).
+Milestone 4: Automated PostgreSQL-to-Excel Reporting Pipeline
+Direct Database Extraction: Utilised a one-liner Bash/Python execution pipeline leveraging PostgreSQL container commands (\copy) to query ticket metadata, customer names, state IDs, priorities, and timestamps directly into a clean CSV format.
 
-## Running without Elasticsearch
+Advanced Spreadsheet Styling: Developed an automated Python script using pandas and openpyxl to format the exported data with custom corporate palette fills (subtle pink/plum zebra striping), thin borders, frozen header panes, and auto-fitted column widths.
 
-Elasticsearch is an optional, but strongly recommended dependency for Zammad. More details can be found in the [documentation](https://docs.zammad.org/en/latest/prerequisites/software.html#elasticsearch-optional). There are however certain scenarios when running without Elasticsearch may be desired, e.g. for very small teams, for teams with limited budget or as a temporary solution for an unplanned Elasticsearch downtime or planned cluster upgrade.
+Dynamic View Bounding & Watermarking: Implemented automated bounding to hide extraneous empty rows and columns beyond active dataset boundaries, alongside programmatic insertion of a 20% opacity semi-transparent corporate logo watermark.
 
-Elasticsearch is enabled by default in the example `docker-compose.yml` file. It is also by default required to run the "zammad-init" command. Disabling Elasticsearch is possible by setting a special environment variable: `ELASTICSEARCH_ENABLED=false` and loading
-the scenario [disable-elasticsearch-service.yml](scenarios/disable-elasticsearch-service.yml).
+
+This project showcases full-stack capability ranging from Linux systems administration and Docker containerisation to front-end UI/UX engineering and automated data pipelines.
