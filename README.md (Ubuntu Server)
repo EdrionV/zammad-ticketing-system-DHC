@@ -1,0 +1,164 @@
+Enterprise IT Ticketing, Zammad Deployment & Automated Analytics Pipeline
+A production-ready, highly customized IT support helpdesk and reporting system built on Ubuntu Server, containerized via Docker, powered by Zammad, and augmented with custom Python/Pandas data pipelines.
+
+🏗️ System Architecture & Tech Stack
+OS: Ubuntu Server 26.04.1 LTS
+
+Containerization: Docker & Docker Compose V2
+
+Helpdesk Core: Zammad (PostgreSQL backend)
+
+Front-End UI: HTML5, CSS3 (Custom DHC Theme), jQuery (MutationObserver)
+
+Reporting Engine: Python, Pandas, Openpyxl, Pillow (PIL)
+
+Automation & Transfer: Bash scripting, Cron, SCP, SSH
+
+⚙️ Phase 1: Server Setup & Dockerized Zammad Deployment
+
+Update System Packages:
+
+Bash
+sudo apt update && sudo apt upgrade -y
+
+
+Install Docker and Compose:
+
+Bash
+sudo apt install docker.io docker-compose-v2 -y
+
+
+Clone and Configure Zammad Docker Environment:
+
+Bash
+git clone https://github.com/zammad/zammad-docker-compose.git
+cd zammad-docker-compose
+
+
+Tune Kernel Parameters (Required for Elasticsearch/Zammad stability):
+
+Bash
+sudo sysctl -w vm.max_map_count=262144
+
+
+
+Deploy the Containers:
+
+Bash
+sudo docker compose up -d
+
+
+
+
+
+🛠️ Phase 2: Remote Access & Operational Troubleshooting
+SSH Remote Access:
+
+Bash
+ssh ed@10.203.182.114
+
+
+Verify Container Health:
+
+Bash
+cd zammad-docker-compose
+sudo docker compose ps
+sudo docker compose port web 80
+
+
+
+Stream Live Logs (Debugging):
+
+Bash
+sudo docker compose logs -f
+# Press Ctrl + C to exit logs
+
+
+
+
+Web Interface Access:
+Open your browser and navigate to:
+[http://10.203.182.114:8080](http://10.203.182.114:8080)
+
+
+
+
+
+
+
+
+
+🔒 Phase 3: Security & Server Hardening
+Screen Locking Utility (vlock):
+Install vlock to secure terminal sessions when away from the console:
+
+Bash
+sudo apt update && sudo apt install vlock -y
+# To lock terminal session:
+vlock
+
+
+
+Nginx Body Size Configuration (File Attachments):
+Verify or modify upload limits for ticket attachments by editing the Nginx configuration:
+
+Bash
+sudo nano /etc/nginx/sites-available/default
+(Check/modify client_max_body_size as needed, then reload Nginx):
+
+Bash
+sudo systemctl reload nginx
+
+
+
+
+
+
+
+📊 Phase 4: Automated Excel Reporting Pipeline
+The reporting engine executes an automated database dump from the PostgreSQL container, processes data via Pandas, applies custom DHC corporate styling, and inserts an alpha-blended watermark.
+
+🐍 Python Processing Script (/home/ed/export_tickets.sh or Python script)
+import pandas as pd
+import openpyxl
+import os
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.utils import get_column_letter
+from PIL import Image
+import subprocess
+
+# 1. Execute PostgreSQL copy command via Docker to export raw ticket data to CSV
+export_cmd = (
+    "sudo docker exec -i zammad-docker-compose-zammad-postgresql-1 psql -U zammad -d zammad_production "
+    "-c \"\\copy (SELECT ROW_NUMBER() OVER (ORDER BY t.id ASC) AS id, t.number AS ticket_number, t.title, "
+    "u.firstname || ' ' || u.lastname AS customer_name, t.state_id, t.priority_id, "
+    "TO_CHAR(t.created_at, 'YYYY-MM-DD') AS created_date, TO_CHAR(t.created_at, 'HH24:MI:SS') AS created_time "
+    "FROM tickets t LEFT JOIN users u ON t.customer_id = u.id ORDER BY t.id ASC) "
+    "TO STDOUT WITH CSV HEADER\" > ~/tickets_export.csv"
+)
+subprocess.run(export_cmd, shell=True, check=True)
+
+# 2. Read CSV and initialise workbook
+csv_path = '/home/ed/tickets_export.csv'
+excel_path = '/home/ed/tickets_export.xlsx'
+
+df = pd.read_csv(csv_path, dtype={'ticket_number': str})
+df.to_excel(excel_path, index=False)
+
+wb = openpyxl.load_workbook(excel_path)
+ws = wb.active
+
+# 3. Define DHC Subtle Theme Palette & Apply Formatting...
+# (Full openpyxl styling, zebra striping, dynamic view bounding, and watermark logic implemented here)
+
+
+
+
+🔄 Phase 5: Remote File Synchronization & Automation
+To pull the generated executive reports directly from the Ubuntu server to a local Windows machine (OneDrive directory) via PowerShell/SCP:
+scp ed@10.203.182.72:/home/ed/tickets_export.xlsx "C:\Users\edrion\OneDrive - NHS (1)\IT_Tickets_Reports_XL\tickets_export.xlsx"
+
+
+
+Automating Execution:
+You can bundle the pipeline execution and tie it into a Linux cron job for hands-free daily/hourly reporting updates.
