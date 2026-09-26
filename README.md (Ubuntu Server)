@@ -151,7 +151,7 @@ ws = wb.active
 # 3. Define DHC Subtle Theme Palette & Apply Formatting...
 # (Full openpyxl styling, zebra striping, dynamic view bounding, and watermark logic implemented here)
 
-
+In additiona, I Integrated an enterprise Microsoft 365 Copilot AI Support Agent into the custom portal UI, leveraging secure corporate authentication to assist staff with NHS knowledge base routing and ticket creation workflows.
 
 
 🔄 Phase 5: Remote File Synchronization & Automation
