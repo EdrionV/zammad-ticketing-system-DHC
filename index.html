@@ -16,25 +16,125 @@
             background: linear-gradient(135deg, #f5eef4 0%, #e6d5e3 100%);
             color: #33292d;
             margin: 0;
-            padding: 40px 20px;
+            padding: 30px 15px;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
+        /* Master Layout with Side Panels */
+        .master-layout {
+            display: flex;
+            max-width: 1680px;
+            width: 100%;
+            gap: 30px;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        /* Side Panels for IT Milestones & NHS Updates (Enlarged & Fancier) */
+        .side-panel {
+            width: 360px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            flex-shrink: 0;
+        }
+        .milestone-card {
+            background: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(91, 30, 99, 0.08), 0 0 15px rgba(168, 5, 107, 0.04);
+            border: 1px solid rgba(168, 5, 107, 0.15);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        .milestone-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 45px rgba(91, 30, 99, 0.22), 0 0 25px rgba(168, 5, 107, 0.35);
+            border-color: #A8056B;
+        }
+        .milestone-img-container {
+            width: 100%;
+            height: 155px;
+            overflow: hidden;
+            background: #5B1E63;
+            position: relative;
+        }
+        .milestone-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.92;
+            transition: transform 0.5s ease;
+        }
+        .milestone-card:hover .milestone-img-container img {
+            transform: scale(1.06);
+        }
+        .milestone-content {
+            padding: 16px 20px 18px 20px;
+        }
+        .milestone-badge {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #A8056B;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .milestone-content h4 {
+            margin: 0 0 8px 0;
+            font-size: 0.96rem;
+            color: #2c252a;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+        .milestone-content p {
+            margin: 0 0 10px 0;
+            font-size: 0.84rem;
+            color: #555;
+            line-height: 1.45;
+        }
+        .milestone-extra {
+            font-size: 0.79rem;
+            color: #555;
+            background: #fcf8fa;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border-left: 3px solid #A8056B;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .milestone-link-prompt {
+            font-size: 0.78rem;
+            color: #A8056B;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Central Form Wrapper */
         .portal-wrapper {
             background: #ffffff;
-            max-width: 720px;
+            max-width: 950px;
             width: 100%;
             border-radius: 16px;
             box-shadow: 0 15px 40px rgba(91, 30, 99, 0.15);
             overflow: hidden;
             border-top: 6px solid #5B1E63;
             border: 1px solid rgba(91, 30, 99, 0.12);
+            flex-grow: 1;
         }
         .portal-header {
             text-align: center;
-            padding: 40px 30px 22px 30px;
+            padding: 35px 30px 20px 30px;
             background: #ffffff;
             border-bottom: 1px solid #f0e6ee;
             display: flex;
@@ -43,8 +143,8 @@
             justify-content: center;
         }
         .portal-header img {
-            width: 145px;
-            height: 145px;
+            width: 140px;
+            height: 140px;
             object-fit: contain;
             margin-bottom: 15px;
             border-radius: 14px;
@@ -61,7 +161,7 @@
             text-transform: uppercase;
         }
         .form-content {
-            padding: 35px 45px 15px 45px;
+            padding: 30px 40px 15px 40px;
         }
 
         /* Custom DHC Service Area Section */
@@ -139,7 +239,7 @@
         }
 
         /* Submit Button Styling */
-        #zammad-form-container button, 
+        #zammad-form-container button,
         #zammad-form-container input[type="submit"] {
             background: linear-gradient(135deg, #A8056B 0%, #5B1E63 100%) !important;
             border: none !important;
@@ -155,7 +255,7 @@
             margin-top: 10px;
             width: 100%;
         }
-        #zammad-form-container button:hover, 
+        #zammad-form-container button:hover,
         #zammad-form-container input[type="submit"]:hover {
             background: linear-gradient(135deg, #b80d75 0%, #6d2477 100%) !important;
             box-shadow: 0 8px 25px rgba(168, 5, 107, 0.45) !important;
@@ -167,7 +267,7 @@
             background-color: #fcf8fa;
             border-left: 4px solid #A8056B;
             padding: 16px 20px;
-            margin: 0 45px 35px 45px;
+            margin: 0 40px 35px 40px;
             border-radius: 0 10px 10px 0;
             font-size: 0.9rem;
             color: #444;
@@ -183,7 +283,26 @@
             font-weight: 700;
         }
 
-        @media (max-width: 650px) {
+        /* Responsive Design: Stack side panels below/above on smaller screens */
+        @media (max-width: 1200px) {
+            .master-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+            .side-panel {
+                width: 100%;
+                max-width: 680px;
+                flex-direction: row;
+                gap: 15px;
+            }
+            .milestone-card {
+                flex: 1;
+            }
+        }
+        @media (max-width: 700px) {
+            .side-panel {
+                flex-direction: column;
+            }
             .form-content { padding: 25px 20px; }
             .daily-fact-card { margin: 0 20px 25px 20px; }
             .radio-grid { grid-template-columns: 1fr; }
@@ -192,32 +311,83 @@
 </head>
 <body>
 
-    <div class="portal-wrapper">
-        <div class="portal-header">
-            <img src="DHC-logo-square.jpg" alt="DHC Logo">
-            <h2>IT Support Helpdesk</h2>
-        </div>
-        
-        <div class="form-content">
-            <!-- Custom DHC Service Area Selector -->
-            <div class="custom-dhc-section">
-                <label class="main-label">Select DHC Service Area *</label>
-                <div class="radio-grid">
-                    <label><input type="radio" name="dhc_service_area" value="GP Federation"> GP Federation</label>
-                    <label><input type="radio" name="dhc_service_area" value="Outpatients"> Outpatients</label>
-                    <label><input type="radio" name="dhc_service_area" value="Talking Therapies"> Talking Therapies</label>
-                    <label><input type="radio" name="dhc_service_area" value="PCN"> PCN</label>
+    <div class="master-layout">
+        <!-- Left Side Panel (2 Milestones / Updates) -->
+        <div class="side-panel" id="left-panel">
+            <a class="milestone-card" id="left-card-1" href="#" target="_blank">
+                <div class="milestone-img-container"><img id="l-img-1" src="" alt="IT Milestone"></div>
+                <div class="milestone-content">
+                    <span class="milestone-badge" id="l-badge-1">IT History</span>
+                    <h4 id="l-title-1">Loading...</h4>
+                    <p id="l-desc-1">Loading milestone details...</p>
+                    <div class="milestone-extra" id="l-extra-1"></div>
+                    <span class="milestone-link-prompt">🔗 View Source Details &rarr;</span>
                 </div>
+            </a>
+            <a class="milestone-card" id="left-card-2" href="#" target="_blank">
+                <div class="milestone-img-container"><img id="l-img-2" src="" alt="NHS Tech Update"></div>
+                <div class="milestone-content">
+                    <span class="milestone-badge" id="l-badge-2">NHS Security</span>
+                    <h4 id="l-title-2">Loading...</h4>
+                    <p id="l-desc-2">Loading announcement details...</p>
+                    <div class="milestone-extra" id="l-extra-2"></div>
+                    <span class="milestone-link-prompt">🔗 View Source Details &rarr;</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Central Form Wrapper -->
+        <div class="portal-wrapper">
+            <div class="portal-header" id="portal-header-container">
+                <img src="DHC-logo-square.jpg" alt="DHC Logo">
+                <h2>IT Support Helpdesk</h2>
             </div>
 
-            <!-- Zammad Form Container -->
-            <div id="zammad-form-container"></div>
+            <div class="form-content">
+                <!-- Custom DHC Service Area Selector -->
+                <div class="custom-dhc-section">
+                    <label class="main-label">Select DHC Service Area *</label>
+                    <div class="radio-grid">
+                        <label><input type="radio" name="dhc_service_area" value="GP Federation"> GP Federation</label>
+                        <label><input type="radio" name="dhc_service_area" value="Outpatients"> Outpatients</label>
+                        <label><input type="radio" name="dhc_service_area" value="Talking Therapies"> Talking Therapies</label>
+                        <label><input type="radio" name="dhc_service_area" value="PCN"> PCN</label>
+                    </div>
+                </div>
+
+                <!-- Zammad Form Container -->
+                <div id="zammad-form-container"></div>
+            </div>
+
+            <!-- Daily Rotating IT Fact Box -->
+            <div class="daily-fact-card">
+                <strong>💡 IT Fact & Tip of the Day</strong>
+                <span id="daily-fact-text">Loading daily IT knowledge...</span>
+            </div>
         </div>
 
-        <!-- Daily Rotating IT Fact Box -->
-        <div class="daily-fact-card">
-            <strong id="daily-fact-title">💡 IT Fact & Tip of the Day</strong>
-            <span id="daily-fact-text">Loading daily IT knowledge...</span>
+        <!-- Right Side Panel (2 Milestones / Updates) -->
+        <div class="side-panel" id="right-panel">
+            <a class="milestone-card" id="right-card-1" href="#" target="_blank">
+                <div class="milestone-img-container"><img id="r-img-1" src="" alt="Tech Pioneer"></div>
+                <div class="milestone-content">
+                    <span class="milestone-badge" id="r-badge-1">Computing Pioneer</span>
+                    <h4 id="r-title-1">Loading...</h4>
+                    <p id="r-desc-1">Loading milestone details...</p>
+                    <div class="milestone-extra" id="r-extra-1"></div>
+                    <span class="milestone-link-prompt">🔗 View Source Details &rarr;</span>
+                </div>
+            </a>
+            <a class="milestone-card" id="right-card-2" href="#" target="_blank">
+                <div class="milestone-img-container"><img id="r-img-2" src="" alt="Cyber Alert"></div>
+                <div class="milestone-content">
+                    <span class="milestone-badge" id="r-badge-2">NHS Digital Alert</span>
+                    <h4 id="r-title-2">Loading...</h4>
+                    <p id="r-desc-2">Loading alert details...</p>
+                    <div class="milestone-extra" id="r-extra-2"></div>
+                    <span class="milestone-link-prompt">🔗 View Source Details &rarr;</span>
+                </div>
+            </a>
         </div>
     </div>
 
@@ -227,6 +397,15 @@
     <script>
     $(function() {
         var submittedCustomerName = '';
+
+        // May 17th Special Check: World Telecommunication and Information Society Day
+        var now = new Date();
+        if (now.getMonth() === 4 && now.getDate() === 17) {
+            $('#portal-header-container').prepend(
+                '<div style="background: linear-gradient(135deg, #A8056B, #5B1E63); color: white; padding: 7px 16px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 12px rgba(168,5,107,0.3);">' +
+                '🌐 World Telecommunication & Information Society Day 🌐</div>'
+            );
+        }
 
         // Initialize Zammad Form Widget
         $('#zammad-form-container').ZammadForm({
@@ -241,7 +420,7 @@
         // Validate service area, capture name, and inject payload into message body on submit
         $(document).on('submit', '#zammad-form-container form', function(e) {
             var selectedArea = $('input[name="dhc_service_area"]:checked').val();
-            
+
             if (!selectedArea) {
                 alert('Please select a DHC Service Area before submitting.');
                 e.preventDefault();
@@ -249,7 +428,6 @@
                 return false;
             }
 
-            // Capture the customer's name BEFORE Zammad clears form inputs
             submittedCustomerName = '';
             $('#zammad-form-container input[type="text"]').each(function() {
                 var val = $(this).val().trim();
@@ -271,7 +449,7 @@
             }
         });
 
-        // MutationObserver to safely extract ticket ID and inject personalized success card
+        // MutationObserver for success ticket display
         var observer = new MutationObserver(function(mutations, obs) {
             var container = document.getElementById('zammad-form-container');
             if (!container) return;
@@ -288,7 +466,7 @@
                 var displayName = submittedCustomerName ? submittedCustomerName : 'there';
 
                 obs.disconnect();
-                
+
                 $successMsg.parent().html(
                     '<div style="background: linear-gradient(135deg, #fcf8fa 0%, #f4e8f1 100%); ' +
                     'border: 2px dashed #A8056B; padding: 25px; border-radius: 12px; text-align: center; color: #5B1E63; margin-bottom: 10px;">' +
@@ -299,7 +477,7 @@
                     '</p>' +
                     '</div>'
                 );
-                
+
                 obs.observe(container, { childList: true, subtree: true, characterData: true });
             }
         });
@@ -309,49 +487,273 @@
             observer.observe(container, { childList: true, subtree: true, characterData: true });
         }
 
-        // Daily IT Facts Rotator & World ICT Day Special Handler
-        var combinedItFacts = [
-            "Locking your screen with Windows Key + L whenever you step away keeps patient data secure and confidential.",
-            "Phishing emails often create a false sense of urgency. Always take a moment to pause and verify unusual requests.",
-            "Restarting your computer once a week clears out background cache leaks and keeps system performance snappy.",
-            "Strong passwords use a mix of uppercase letters, numbers, and symbols—or three easy random words combined together!",
-            "NHS.net multi-factor authentication (MFA) is your frontline defense against unauthorized access and credential theft.",
-            "Regular system updates apply critical security patches before emerging digital threats can exploit them.",
-            "Backing up important workflow documents ensures business continuity even if hardware fails unexpectedly.",
-            "The first computer 'bug' was literally a real live moth trapped inside Relay #75 of the Harvard Mark II computer in 1947.",
-            "The total weight of all electrons moving through the entire internet at any given microsecond is roughly the weight of a single strawberry.",
-            "The Apollo 11 moon-landing computer in 1969 had only 73 KB of memory—millions of times less powerful than a modern digital car key.",
-            "QWERTY keyboards were deliberately arranged to slow typists down so mechanical typewriter arms wouldn't jam together.",
-            "The iconic Apple command (⌘) key symbol is actually an old 14th-century Swedish road sign indicating a cultural landmark or campground.",
-            "More than 90% of the entire world's currency exists purely as digital data entries in databases; physical cash makes up less than 10%.",
-            "The domain name 'symbolics.com' was registered on March 15, 1985, making it the very first dot-com domain on the internet, and it is still active today!",
-            "CAPTCHA stands for 'Completely Automated Public Turing test to tell Computers and Humans Apart'.",
-            "The Bluetooth technology name comes from Harald Bluetooth, a 10th-century Scandinavian king who united tribes just like Bluetooth unites devices.",
-            "Wi-Fi doesn't actually stand for an acronym; it was created purely as a catchy marketing placeholder by a branding firm."
-        ];
 
-        var now = new Date();
-        var month = now.getMonth() + 1; // 1-12
-        var day = now.getDate(); // 1-31
-
-        if (month === 5 && day === 17) {
-            // World ICT Day Special Greeting
-            $('#daily-fact-title').text('🌍 Happy World ICT Day! (17th May)');
-            $('#daily-fact-text').html('Celebrating the remarkable power of Information and Communication Technology in transforming healthcare delivery, bridging communities, and empowering IT innovators worldwide! 🎉');
-            $('.daily-fact-card').css({
-                'background-color': '#f3e6f0',
-                'border-left-color': '#5B1E63'
-            });
-        } else {
-            var start = new Date(now.getFullYear(), 0, 0);
-            var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
-            var dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
-            var factIndex = dayOfYear % combinedItFacts.length;
-
-            $('#daily-fact-text').text(combinedItFacts[factIndex]);
+// 20-Day Cycle (Expanded with rich historical IT milestones and computing pioneers)
+    var milestoneCycleData = [
+        // Day 1
+        {
+            l1: { badge: "IT Milestone", title: "ENIAC Activation (1946)", desc: "The first general-purpose electronic digital computer started running operations.", extra: "Weighing 30 tons and occupying 1,800 square feet, it utilized nearly 18,000 vacuum tubes.", url: "https://en.wikipedia.org/wiki/ENIAC", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "NHSnet Portal Launch", desc: "Connecting healthcare providers securely across the UK network infrastructure.", extra: "Delivers encrypted clinical data exchange and seamless inter-trust communications.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Ada Lovelace", desc: "Wrote the world's first algorithm intended for implementation on a machine.", extra: "Collaborated with Charles Babbage on the theoretical Mechanical Analytical Engine.", url: "https://en.wikipedia.org/wiki/Ada_Lovelace", img: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "NHS Digital Security", desc: "Maintaining robust threat intelligence and multi-factor defense protocols.", extra: "Proactive mitigation strategies designed to safeguard patient records 24/7.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 2
+        {
+            l1: { badge: "World Tech", title: "World Wide Web (1989)", desc: "Tim Berners-Lee proposed the global hypertext project at CERN.", extra: "Transformed information sharing into a decentralized global network.", url: "https://en.wikipedia.org/wiki/World_Wide_Web", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Service Desk Portal", desc: "Streamlining clinical and administrative IT requests across NHS trusts.", extra: "Empowering healthcare workers with rapid ticket tracking and resolution.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Alan Turing", desc: "Laid the foundational pillars for theoretical computer science and AI.", extra: "Formulated the Turing Test and cracked the Enigma code at Bletchley Park.", url: "https://en.wikipedia.org/wiki/Alan_Turing", img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Phishing Mitigation", desc: "Regular awareness training protects patient records from social engineering.", extra: "Educating personnel to spot suspicious email anomalies instantly.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 3
+        {
+            l1: { badge: "Networking", title: "ARPANET First Message", desc: "The precursor to the modern internet successfully transmitted 'LO'.", extra: "Attempted to type 'LOGIN', crashing the system after the first two letters.", url: "https://en.wikipedia.org/wiki/ARPANET", img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Smartcard Authentication", desc: "Securing clinical access to spine-backed patient care records.", extra: "Ensures role-based access control across medical databases.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Grace Hopper", desc: "Invented the first compiler and popularized machine-independent programming.", extra: "Coined the term 'debugging' after finding a moth trapped in a relay.", url: "https://en.wikipedia.org/wiki/Grace_Hopper", img: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Vulnerability Patching", desc: "Applying rapid security updates to prevent unauthorized system exploits.", extra: "Critical maintenance cycle to seal known software vulnerabilities.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1510519138161-5364d8cd7bb5?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 4
+        {
+            l1: { badge: "Hardware", title: "First Computer Mouse (1964)", desc: "Douglas Engelbart unveiled the wooden prototype with two metal wheels.", extra: "Patented as an 'X-Y Position Indicator for a Display System'.", url: "https://en.wikipedia.org/wiki/Computer_mouse", img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Clinical Workstations", desc: "Optimizing hardware and software reliability for frontline care staff.", extra: "Reducing latency for electronic patient health record charting.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Linus Torvalds", desc: "Created the Linux kernel, powering enterprise servers and cloud systems.", extra: "Revolutionized open-source software development collaboration.", url: "https://en.wikipedia.org/wiki/Linus_Torvalds", img: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Data Confidentiality", desc: "Ensuring strict adherence to patient data privacy and encryption standards.", extra: "Committed to maintaining absolute trust in medical data handling.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1563237023-bfe1f76dd674?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 5
+        {
+            l1: { badge: "Software", title: "Unix Operating System", desc: "Developed at Bell Labs, establishing multitasking and multi-user standards.", extra: "Influenced nearly all modern enterprise operating system architectures.", url: "https://en.wikipedia.org/wiki/Unix", img: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Pathology IT Systems", desc: "Ensuring uninterrupted diagnostic data flow between labs and clinics.", extra: "Fast-tracking vital test results to attending physicians securely.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Tim Berners-Lee", desc: "Inventor of the World Wide Web and open web standards champion.", extra: "Champions data privacy and decentralization through the Solid project.", url: "https://en.wikipedia.org/wiki/Tim_Berners-Lee", img: "https://images.unsplash.com/photo-1525373698358-043e3a41235d?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Secure Remote Access", desc: "Enforcing encrypted VPN tunnels and strict credential policies.", extra: "Protecting remote telemetry and telehealth practitioner sessions.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 6
+        {
+            l1: { badge: "Telecomm", title: "First Transatlantic Cable", desc: "Revolutionized global communication speed across ocean floors in 1858.", extra: "Cut message transmission time between London and New York from weeks to minutes.", url: "https://en.wikipedia.org/wiki/Transatlantic_telegraph_cable", img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "GP Federation Systems", desc: "Bridging primary care networks with centralized IT resources.", extra: "Coordinating multi-practice administrative workflows efficiently.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Vint Cerf & Bob Kahn", desc: "Designed TCP/IP protocols that form the transmission core of the internet.", extra: "Enabled disparate packet-switching networks to communicate seamlessly.", url: "https://en.wikipedia.org/wiki/Vint_Cerf", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Threat Intelligence", desc: "Monitoring NHS Digital alerts for early indicator detection.", extra: "Applying proactive threat feeds to harden local network perimeters.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 7
+        {
+            l1: { badge: "Storage", title: "First Hard Disk Drive", desc: "IBM 305 RAMAC introduced magnetic disk storage in 1956.", extra: "Stored a massive 5 megabytes of data across fifty 24-inch rotating platters.", url: "https://en.wikipedia.org/wiki/IBM_305_RAMAC", img: "https://images.unsplash.com/photo-1597852074816-d933c7d2b988?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Telephony Integration", desc: "Modernizing patient booking hotlines and routing systems.", extra: "Reducing caller wait times with intelligent automated queueing.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Claude Shannon", desc: "Foundational mathematician of digital circuit design and information theory.", extra: "Proved Boolean algebra could be applied to electronic switching circuits.", url: "https://en.wikipedia.org/wiki/Claude_Shannon", img: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Backup Resilience", desc: "Verifying immutable offline backups to guard against ransomware.", extra: "Ensuring rapid recovery capabilities without paying threat actors.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 8
+        {
+            l1: { badge: "Space Tech", title: "Apollo Guidance Computer", desc: "Guided humanity to the lunar surface with pioneering embedded software.", extra: "Utilized revolutionary rope-core ROM memory woven by textile workers.", url: "https://en.wikipedia.org/wiki/Apollo_Guidance_Computer", img: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Outpatient Digital Flow", desc: "Streamlining clinic check-ins and electronic referral management.", extra: "Eliminating paper bottlenecks in busy hospital reception lobbies.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Margaret Hamilton", desc: "Led software engineering for the NASA Apollo space program.", extra: "Pioneered asynchronous executive processing to prevent system crashes.", url: "https://en.wikipedia.org/wiki/Margaret_Hamilton_(software_engineer)", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Endpoint Protection", desc: "Deploying automated agent monitoring across all trust endpoints.", extra: "Real-time behavioral analysis flags anomalous execution processes.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 9
+        {
+            l1: { badge: "Microchip", title: "Intel 4004 (1971)", desc: "The world's first commercially available single-chip microprocessor.", extra: "Originally commissioned for a calculator, packing 2,300 transistors on a tiny silicon chip.", url: "https://en.wikipedia.org/wiki/Intel_4004", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Asset Inventory Tracking", desc: "Cataloging medical devices, laptops, and peripheral hardware.", extra: "Ensures quick tracking of deployment lifecycles and warranty updates.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Radia Perlman", desc: "Invented the Spanning Tree Protocol (STP), transforming Ethernet bridging.", extra: "Often referred to as the 'Mother of the Internet' for network routing resilience.", url: "https://en.wikipedia.org/wiki/Radia_Perlman", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Network Hardening", desc: "Disabling unused switch ports and enforcing enterprise port security.", extra: "Mitigating unauthorized device hookups and rogue network entry.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 10
+        {
+            l1: { badge: "Crypto", title: "RSA Algorithm (1977)", desc: "Introduced public-key cryptography to secure digital communications.", extra: "Relies on the mathematical difficulty of factoring large prime numbers.", url: "https://en.wikipedia.org/wiki/RSA_(cryptosystem)", img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Certificate Management", desc: "Automating SSL/TLS renewals for secure internal web apps.", extra: "Preventing browser security warnings and expired certificate outages.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Diffie & Hellman", desc: "Pioneered public-key cryptography and secure key exchange mechanisms.", extra: "Solved the age-old problem of how to securely share encryption keys over open lines.", url: "https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Key Management", desc: "Auditing cryptographic storage keys and rotating algorithm standards.", extra: "Ensuring long-term cipher integrity against modern brute-force techniques.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1510519138161-5364d8cd7bb5?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 11
+        {
+            l1: { badge: "Messaging", title: "First Network Email (1971)", desc: "Ray Tomlinson sent the first cross-network message using the @ symbol.", extra: "Chose the '@' symbol to separate the user name from their destination host.", url: "https://en.wikipedia.org/wiki/Email", img: "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Secure Mail Relay", desc: "Managing NHS mail gateways for encrypted inter-trust messaging.", extra: "Filtering spam and protecting medical teams from malicious email payloads.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Barbara Liskov", desc: "Developed the Liskov Substitution Principle and pioneered data abstraction.", extra: "First woman in the United States to be awarded a PhD in computer science.", url: "https://en.wikipedia.org/wiki/Barbara_Liskov", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Email Gateway Defense", desc: "Enforcing strict SPF, DKIM, and DMARC policies across all domains.", extra: "Stopping domain spoofing and fraudulent message routing dead in their tracks.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 12
+        {
+            l1: { badge: "Wireless", title: "IEEE 802.11 Standard", desc: "Established the specifications for wireless local area network technology.", extra: "Commonly known as Wi-Fi, it revolutionized untethered office connectivity.", url: "https://en.wikipedia.org/wiki/IEEE_802.11", img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Clinical Wi-Fi Roaming", desc: "Ensuring stable wireless coverage for mobile clinical carts and tablets.", extra: "Minimizing dead zones across hospital wards and surgical wings.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Hedy Lamarr", desc: "Co-invented a frequency-hopping spread spectrum communication system.", extra: "Originally designed during WWII to guide torpedoes securely, laying groundwork for Wi-Fi.", url: "https://en.wikipedia.org/wiki/Hedy_Lamarr", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "WPA3 Enterprise", desc: "Upgrading wireless encryption protocols to protect over-the-air packets.", extra: "Preventing packet sniffing and unauthorized eavesdropping on radio frequencies.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1563237023-bfe1f76dd674?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 13
+        {
+            l1: { badge: "Networking", title: "Ethernet Invention (1973)", desc: "Bob Metcalfe formulated the local area network cabling standard at Xerox PARC.", extra: "Derived its name from the theoretical 'luminiferous aether' once thought to fill space.", url: "https://en.wikipedia.org/wiki/Ethernet", img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Switch Port Diagnostics", desc: "Monitoring switch error counts and duplex misconfigurations.", extra: "Ensuring zero-drop packet transfers across core distribution switches.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Sister Mary Kenneth Keller", desc: "First woman to earn a PhD in computer science in the United States.", extra: "Co-developed BASIC and advocated heavily for computer literacy in education.", url: "https://en.wikipedia.org/wiki/Mary_Kenneth_Keller", img: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "DHCP Snooping", desc: "Defending enterprise local area networks against rogue DHCP servers.", extra: "Blocking unauthorized IP address assignments and man-in-the-middle attacks.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 14
+        {
+            l1: { badge: "Security History", title: "The Morris Worm (1988)", desc: "One of the first computer worms distributed via the internet.", extra: "Inadvertently brought down thousands of vulnerable Unix machines globally.", url: "https://en.wikipedia.org/wiki/Morris_worm", img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Incident Response Desk", desc: "Rapid triage protocols for isolated workstation containment.", extra: "Preventing lateral movement during unexpected anomalous system activity.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Whitfield Diffie", desc: "Revolutionized cryptographic security concepts and digital key management.", extra: "Fought for privacy rights and open security evaluation across government systems.", url: "https://en.wikipedia.org/wiki/Whitfield_Diffie", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Network Segmentation", desc: "Isolating critical clinical equipment from standard administrative subnets.", extra: "Stopping potential malware outbreaks from traveling across trust zones.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 15
+        {
+            l1: { badge: "Programming", title: "Python Language Release", desc: "Conceived by Guido van Rossum to emphasize code readability and clean syntax.", extra: "Named after the British comedy troupe Monty Python, not the reptile.", url: "https://en.wikipedia.org/wiki/Python_(programming_language)", img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Automation Scripts", desc: "Deploying helper scripts to accelerate bulk user account maintenance.", extra: "Reducing manual administrative overhead on routine ticketing tasks.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Guido van Rossum", desc: "Author of the Python programming language, serving as 'Benevolent Dictator for Life'.", extra: "Designed language constructs that bridge simplicity with high-performance execution.", url: "https://en.wikipedia.org/wiki/Guido_van_Rossum", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Secure Code Audit", desc: "Checking internal script logic for hardcoded credentials or vulnerabilities.", extra: "Ensuring custom automation tools adhere strictly to least-privilege guidelines.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1510519138161-5364d8cd7bb5?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 16
+        {
+            l1: { badge: "Database", title: "PostgreSQL Inception", desc: "Evolved from the POSTGRES project at UC Berkeley into a robust SQL engine.", extra: "Renowned for rock-solid reliability, extensibility, and standards compliance.", url: "https://en.wikipedia.org/wiki/PostgreSQL", img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Database Maintenance", desc: "Optimizing ticket archive indices for faster ticketing lookup queries.", extra: "Ensuring helpdesk reporting metrics generate smoothly without lag.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Michael Stonebraker", desc: "Database pioneer behind Ingres, Postgres, and Vertica architectures.", extra: "Winner of the Turing Award for foundational contributions to database management systems.", url: "https://en.wikipedia.org/wiki/Michael_Stonebraker", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Access Control Lists", desc: "Restricting direct database connections to authenticated application nodes.", extra: "Defending sensitive records against unauthorized table queries.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 17
+        {
+            l1: { badge: "Protocol", title: "Packet Switching (1960s)", desc: "Developed independently by Paul Baran and Donald Davies for robust data routing.", extra: "Broke data messages into addressed blocks to survive node failures.", url: "https://en.wikipedia.org/wiki/Packet_switching", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "QoS Traffic Shaping", desc: "Prioritizing voice and video telemedicine packets over standard web browsing.", extra: "Eliminating jitter during critical remote patient consultations.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Paul Baran", desc: "Engineered distributed packet-switching communications networks resilient to attacks.", extra: "Conceived the foundational architecture that allowed communication lines to self-heal.", url: "https://en.wikipedia.org/wiki/Paul_Baran", img: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Firewall Inspection", desc: "Enforcing deep packet inspection rules on all perimeter ingress points.", extra: "Filtering out anomalous payload signatures before reaching internal nodes.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 18
+        {
+            l1: { badge: "Security Milestone", title: "First Computer Law", desc: "UK Computer Misuse Act enacted in 1990 to criminalize unauthorized access.", extra: "Established clear legal penalties for hacking and malicious data modification.", url: "https://en.wikipedia.org/wiki/Computer_Misuse_Act_1990", img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Acceptable Use Policy", desc: "Communicating IT resource guidelines clearly to all onboarded personnel.", extra: "Ensures compliance with national data governance frameworks.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Joan Clarke", desc: "Brilliant cryptanalyst who worked alongside Alan Turing at Bletchley Park.", extra: "Played an instrumental role in decoding intercepted Axis messages during WWII.", url: "https://en.wikipedia.org/wiki/Joan_Clarke", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Regulatory Compliance", desc: "Aligning local security controls with national data protection standards.", extra: "Routine verification checks to maintain certification readiness.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1563237023-bfe1f76dd674?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 19
+        {
+            l1: { badge: "Version Control", title: "Git Creation (2005)", desc: "Created by Linus Torvalds to manage Linux kernel development efficiently.", extra: "Introduced a distributed architecture allowing lightning-fast offline branching.", url: "https://en.wikipedia.org/wiki/Git", img: "https://images.unsplash.com/photo-1618401471353-b98aedd04e11?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Script Repository", desc: "Maintaining version history for internal administrative PowerShell tools.", extra: "Enables rapid rollbacks if an automation script encounters unexpected errors.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Bill Gates", desc: "Co-founded Microsoft and popularized personal computing software ecosystems.", extra: "Helped transition computing from bulky mainframe rooms to home and office desks.", url: "https://en.wikipedia.org/wiki/Bill_Gates", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Source Code Safety", desc: "Scanning code repositories for accidentally leaked API keys or passwords.", extra: "Preventing sensitive credential exposure in public or shared branches.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1510519138161-5364d8cd7bb5?auto=format&fit=crop&w=600&q=80" }
+        },
+        // Day 20
+        {
+            l1: { badge: "Containerization", title: "Docker Launch (2013)", desc: "Popularized lightweight OS-level virtualization using Linux containers.", extra: "Allowed developers to package apps and dependencies into portable, isolated images.", url: "https://en.wikipedia.org/wiki/Docker_(software)", img: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=600&q=80" },
+            l2: { badge: "NHS Support", title: "Service Container Hosting", desc: "Running isolated microservices for internal hospital ticketing systems.", extra: "Ensuring clean separation of application runtimes and easy scaling.", url: "https://support.nhs.net/announcements/", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" },
+            r1: { badge: "Pioneer", title: "Dennis Ritchie", desc: "Created the C programming language and co-created the Unix operating system.", extra: "Foundational architect of modern systems software and syntax design.", url: "https://en.wikipedia.org/wiki/Dennis_Ritchie", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" },
+            r2: { badge: "Cyber Alert", title: "Container Isolation", desc: "Scanning container images for known vulnerabilities before deployment.", extra: "Enforcing strict resource boundaries and privilege drop rules.", url: "https://digital.nhs.uk/cyber-alerts", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" }
         }
+    ];
+
+
+        // Calculate Day of Year to select current 4-image set for today
+        var start = new Date(now.getFullYear(), 0, 0);
+        var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+        var dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var cycleIndex = dayOfYear % milestoneCycleData.length;
+        var todaySet = milestoneCycleData[cycleIndex];
+
+        // Populate Left and Right Panels with Extra Info and URLs
+        $('#l-badge-1').text(todaySet.l1.badge);
+        $('#l-title-1').text(todaySet.l1.title);
+        $('#l-desc-1').text(todaySet.l1.desc);
+        $('#l-extra-1').text(todaySet.l1.extra);
+        $('#l-img-1').attr('src', todaySet.l1.img);
+        $('#left-card-1').attr('href', todaySet.l1.url);
+
+        $('#l-badge-2').text(todaySet.l2.badge);
+        $('#l-title-2').text(todaySet.l2.title);
+        $('#l-desc-2').text(todaySet.l2.desc);
+        $('#l-extra-2').text(todaySet.l2.extra);
+        $('#l-img-2').attr('src', todaySet.l2.img);
+        $('#left-card-2').attr('href', todaySet.l2.url);
+
+        $('#r-badge-1').text(todaySet.r1.badge);
+        $('#r-title-1').text(todaySet.r1.title);
+        $('#r-desc-1').text(todaySet.r1.desc);
+        $('#r-extra-1').text(todaySet.r1.extra);
+        $('#r-img-1').attr('src', todaySet.r1.img);
+        $('#right-card-1').attr('href', todaySet.r1.url);
+
+        $('#r-badge-2').text(todaySet.r2.badge);
+        $('#r-title-2').text(todaySet.r2.title);
+        $('#r-desc-2').text(todaySet.r2.desc);
+        $('#r-extra-2').text(todaySet.r2.extra);
+        $('#r-img-2').attr('src', todaySet.r2.img);
+        $('#right-card-2').attr('href', todaySet.r2.url);
+
+        // Daily IT Facts Rotator
+var combinedItFacts = [
+    "Locking your screen with Windows Key + L whenever you step away keeps patient data secure and confidential.",
+    "Phishing emails often create a false sense of urgency. Always take a moment to pause and verify unusual requests.",
+    "Restarting your computer once a week clears out background cache leaks and keeps system performance snappy.",
+    "Strong passwords use a mix of uppercase letters, numbers, and symbols—or three easy random words combined together!",
+    "NHS.net multi-factor authentication (MFA) is your frontline defense against unauthorized access and credential theft.",
+    "Regular system updates apply critical security patches before emerging digital threats can exploit them.",
+    "Backing up important workflow documents ensures business continuity even if hardware fails unexpectedly.",
+    "The first computer 'bug' was literally a real live moth trapped inside Relay #75 of the Harvard Mark II computer in 1947.",
+    "The total weight of all electrons moving through the entire internet at any given microsecond is roughly the weight of a single strawberry.",
+    "The Apollo 11 moon-landing computer in 1969 had only 73 KB of memory—millions of times less powerful than a modern digital car key.",
+    "QWERTY keyboards were deliberately arranged to slow typists down so mechanical typewriter arms wouldn't jam together.",
+    "The iconic Apple command (⌘) key symbol is actually an old 14th-century Swedish road sign indicating a cultural landmark or campground.",
+    "More than 90% of the entire world's currency exists purely as digital data entries in databases; physical cash makes up less than 10%.",
+    "The domain name 'symbolics.com' was registered on March 15, 1985, making it the very first dot-com domain on the internet, and is it still active today.",
+    "CAPTCHA stands for 'Completely Automated Public Turing test to tell Computers and Humans Apart'.",
+    "The Bluetooth technology name comes from Harald Bluetooth, a 10th-century Scandinavian king who united tribes just like Bluetooth unites devices.",
+    "Wi-Fi doesn't actually stand for an acronym; it was created purely as a catchy marketing placeholder by a branding firm.",
+    "The very first webcam was invented at Cambridge University in 1991 solely to monitor a coffee pot so researchers wouldn't waste trips to an empty pot.",
+    "The original name for the search engine Google was 'BackRub', because it analyzed backlinks to estimate a site's importance.",
+    "The `@` symbol goes by entirely different names around the world, including 'snail' in Italy, 'monkey tail' in the Netherlands, and 'sleeping cat' in other regions.",
+    "NASA's Voyager 1 spacecraft, currently traveling through interstellar space, operates on computing memory smaller than a modern car key fob.",
+    "Nintendo was originally founded in 1889 as a playing card company, decades before it ever manufactured electronic video games.",
+    "JavaScript was famously created by Brendan Eich in just 10 frantic days while he was working at Netscape in 1995.",
+    "The first-ever YouTube video, uploaded on April 23, 2005, is titled 'Me at the zoo' and runs for just 18 seconds.",
+    "Spam emails get their name from a famous Monty Python comedy sketch where characters repeatedly chant the word 'SPAM' over menu items.",
+    "For several years during the Cold War, the password for the computer controls of U.S. nuclear missile launch silos was reportedly just eight zeros.",
+    "Mozilla Firefox's iconic logo is actually a red panda, not a fox; 'firefox' is simply a regional nickname for the red panda.",
+    "In 2012, an elderly woman in Georgia accidentally cut off internet access for the entire country of Armenia while digging for copper wire.",
+    "Linux runs on 100% of the world's top 500 supercomputers, alongside powering the overwhelming majority of global cloud infrastructure.",
+    "Computer science pioneer Alan Turing was an elite-level long-distance runner who could routinely compete with Olympic athletes.",
+    "The original PlayStation was originally designed as a CD-ROM add-on for the Super Nintendo console before a corporate dispute led Sony to go solo.",
+    "The most expensive domain name ever sold in history is widely reported to be Voice.com, which fetched an astounding $30 million in 2019.",
+    "The famous 'Error 404' website code has a popular urban legend claiming it was named after room 404 at CERN, though historians debate its true origin.",
+    "The sound of a vintage dial-up modem connecting is actually digital computer data being converted into audible audio tones to travel over phone lines.",
+    "The 1GB IBM 305 RAMAC hard drive introduced in 1956 weighed over a ton and required a forklift to move.",
+    "Over 50% of total global web traffic is generated entirely by automated computer scripts and bots rather than human users.",
+    "The dot-com bubble of the late 1990s saw trillions of dollars in market value surge and crash around speculative internet startups."
+];
+        var factIndex = dayOfYear % combinedItFacts.length;
+        $('#daily-fact-text').text(combinedItFacts[factIndex]);
     });
     </script>
+
+    <!-- DHC Pulsing AI Assistant Trigger Button -->
+<style>
+@keyframes dhcGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(155, 27, 103, 0.4), 0 4px 16px rgba(0,0,0,0.3);
+    }
+    50% {
+        box-shadow: 0 0 22px rgba(155, 27, 103, 0.85), 0 6px 20px rgba(0,0,0,0.4);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(155, 27, 103, 0.4), 0 4px 16px rgba(0,0,0,0.3);
+    }
+}
+.ai-float-btn {
+    background: linear-gradient(135deg, #9B1B67 0%, #70114B 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: dhcGlow 2.5s infinite ease-in-out;
+    transition: transform 0.2s ease;
+}
+.ai-float-btn:hover {
+    transform: translateY(-2px);
+}
+</style>
+
+<div id="ai-chat-wrapper" style="position: fixed; bottom: 25px; right: 25px; z-index: 1000; font-family: inherit;">
+    <a href="https://m365.cloud.microsoft/chat/agent/T_3bcf2244-896e-99b3-481a-b64c6e48b550.70d670cc-67a6-4986-8538-ac25a2cb63dc.gpt.default?titleId=T_3bcf2244-896e-99b3-481a-b64c6e48b550"
+       target="_blank"
+       class="ai-float-btn">
+        💬 DHC Virtual IT Assistant <span style="font-size: 12px; opacity: 0.8;">↗</span>
+    </a>
+</div>
 
 </body>
 </html>
