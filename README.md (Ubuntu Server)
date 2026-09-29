@@ -159,6 +159,25 @@ To pull the generated executive reports directly from the Ubuntu server to a loc
 scp ed@10.203.182.72:/home/ed/tickets_export.xlsx "C:\Users\edrion\OneDrive - NHS (1)\IT_Tickets_Reports_XL\tickets_export.xlsx"
 
 
-
 Automating Execution:
 You can bundle the pipeline execution and tie it into a Linux cron job for hands-free daily/hourly reporting updates.
+
+
+
+## Server Setup & Maintenance
+
+### 1. System Updates & Ubuntu Pro
+This server runs on Ubuntu and utilizes Ubuntu Pro for extended security maintenance.
+1. Update system packages:
+   ```bash
+   sudo apt update && sudo apt upgrade -y
+
+
+Attach Ubuntu Pro (for ESM Apps/Infra and Livepatch):
+
+Bash
+sudo pro attach YOUR_PRO_TOKEN_HERE
+
+
+
+
